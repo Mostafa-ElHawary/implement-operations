@@ -98,3 +98,12 @@ int main() {
 
     return 0;
 }
+    // we need set element by three option 
+       // 1- set with index 
+       // 2- set at last index 
+       // 3- set at frist index   
+
+    // look like function is :
+     // setElement(frist , val ) => it will add to frsit 
+    // setElement(last , val ) => it will add to last
+    // setElement(idnex , val ) => it will add to the spicific index

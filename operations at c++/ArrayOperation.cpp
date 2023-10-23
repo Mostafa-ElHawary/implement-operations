@@ -15,81 +15,119 @@ using namespace std;
 class Array
 {
 private:
+    int *item;
     int size;
     int len;
-    int *items;
 
 public:
-    Array(int siz)
+    Array(int initialsize)
     {
+        if (initialsize <= 0)
+            cout << "Invalid size" << endl;
+        size = initialsize;
         len = 0;
-        size = siz;
-        items = new int[siz];
+        item = new int[initialsize];
+    }
+    bool IsEmpty() const
+    {
+        return len == 0;
     }
 
-    void Fill()
+    bool IsFull() const
     {
-        int count;
-        cout << "inter your count of element" << endl;
-        cin >> count;
-        if (count > size)6
-        {
-            cout << "this num is large";
-        }
-        else
-        {
-            for (int i = 0; i < count; i++)
-            {
-                cout << "inter your element" << i << endl;
-                cin >> items[i];
-                len++;
-            }
-        }
-    };
+        return len == size;
+    }
+    void Size()
+    {
+        cout << "the array Size is : " << size << endl;
+    }
+    void Length()
+    {
+        cout << "the array Length is : " << len << endl;
+    }
 
-    void display()
-    {
-        for (int i = 0; i < len; i++)
-        {
-            cout << items[i] << "\t";
-        }
-    };
-
-    int Search(int val)
-    {
-        for (int i = 0; i < len; i++)
-        {
-            if (items[i] == val)
-            {
-                cout << "found at index " << i << endl;
-            }
-        }
-        // cout << "not found" << endl;
-    };
     void Append(int val)
     {
+
         if (len < size)
         {
-            items[len] = val;
-            len++;
+            item[len] = val;
+            ++len;
         }
         else
         {
-            cout << "array is full" << endl;
+            cout << "Array is full" << endl;
+        }
+    }
+    void GetlastIndex()
+    {
+        if (len == 0)
+        {
+            cout << "Array is empty " << endl;
+        }
+        else
+        {
+            cout << "the last index is : " << item[len - 1] << endl;
         }
     }
 
     void Insert(int index, int val)
     {
-        //          8     5
+
         for (int i = len; i > index; i--)
         {
-            items[len] = items[i - 1];
-            // 5  9    =     90
+            item[i] = item[i - 1];
         }
-        items[index] = val;
+        item[index] = val;
+        len++;
+    }
+    void Display()
+    {
+        if (len == 0)
+            cout << "Array is empty" << endl;
+        for (int i = 0; i < len; i++)
+        {
+            cout << item[i] << " " << endl;
+        }
+    }
+
+    void Remove(int index)
+    {
+        // Add a method to remove elements by index
+        for (int i = index; i < len; i++)
+        {
+            item[i] = item[i + 1];
+        }
+        len--;
+    }
+    void Resize(int newsize)
+    {
+        if (newsize > size)
+        {
+            size = newsize;
+            int *newitem = new int[newsize];
+            for (int i = 0; i < len; i++)
+            {
+                newitem[i] = item[i];
+            }
+        }
+
+        // Implement a mechanism to resize the array when it becomes full. You can create a new, larger array and copy the elements from the old array to the new one.
+    }
+
+    void Find(int indx)
+    {
+        // Implement a method to find the index of a specific value in the array.
+
+        cout << "the index of " << indx << " is : " << item[indx] << endl;
+    }
+
+    ~Array()
+    {
+        delete[] item;
     }
 };
+
 int main()
 {
 

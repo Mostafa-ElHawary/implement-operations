@@ -94,22 +94,31 @@ public:
     void Remove(int index)
     {
         // Add a method to remove elements by index
-        for (int i = index; i < len; i++)
+        if (index >= 0 && index < size)
         {
-            item[i] = item[i + 1];
+            for (int i = index; i < len; i++)
+            {
+                item[i] = item[i + 1];
+            }
+            len--;
         }
-        len--;
+        else
+        {
+            cout << "the index out of range" << endl;
+        }
     }
     void Resize(int newsize)
     {
         if (newsize > size)
         {
             size = newsize;
-            int *newitem = new int[newsize];
+            int *old = item;
+            item = new int[newsize];
             for (int i = 0; i < len; i++)
             {
-                newitem[i] = item[i];
+                item[i] = old[i];
             }
+            delete[] old;
         }
 
         // Implement a mechanism to resize the array when it becomes full. You can create a new, larger array and copy the elements from the old array to the new one.
@@ -122,12 +131,24 @@ public:
         cout << "the index of " << indx << " is : " << item[indx] << endl;
     }
 
+    void Clear()
+    {
+        // Add methods to check if the array is empty and to clear the array's contents.
+
+        // Set the length to 0 to indicate that the array is empty
+        len = 0;
+
+        // Deallocate the allocated memory to prevent memory leaks
+        delete[] item;
+
+        // Reallocate an empty array with the original size
+        item = new int[size];
+    }
     ~Array()
     {
         delete[] item;
     }
 };
-
 int main()
 {
 

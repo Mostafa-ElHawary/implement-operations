@@ -91,22 +91,41 @@ public:
         }
     }
 
-    void Remove(int index)
-    {
-        // Add a method to remove elements by index
-        if (index >= 0 && index < size)
-        {
-            for (int i = index; i < len; i++)
-            {
-                item[i] = item[i + 1];
+    // void Remove(int index)
+    // {
+    //     // Add a method to remove elements by index
+    //     if (index >= 0 && index < size)
+    //     {
+    //         for (int i = index; i < len; i++)
+    //         {
+    //             item[i] = item[i + 1];
+    //         }
+    //         len--;
+    //     }
+    //     else
+    //     {
+    //         cout << "the index out of range" << endl;
+    //     }
+    // }
+
+  void RemoveVal(int val){
+    // for(int i = 0; i < len; i++){
+    //   if(ptr[i] == val){
+    //     ptr[i] = ptr[i+1];
+    //   }
+    // };
+    for (int i = 0; i < len; i++) {
+        if (item[i] == val) {
+            for (int j = i; j < len - 1; j++) {
+                item[j] = item[j + 1];
             }
             len--;
-        }
-        else
-        {
-            cout << "the index out of range" << endl;
+            i--; // Adjust the index because elements shifted
         }
     }
+  };
+
+
     void Resize(int newsize)
     {
         if (newsize > size)
@@ -152,22 +171,7 @@ public:
 int main()
 {
 
-    Array arr(10);
-    arr.Fill();
-    cout << "fill array is Done" << endl;
-    // arr.Search(4);
-    // cout << "Search array is Done" << endl;
 
-    arr.display();
-    cout << "display array is Done" << endl;
-
-    arr.Insert(2, 4);
-    arr.display();
-    cout << "Insert array is Done" << endl;
-    // arr.Append(6);
-    // cout << "Append array is Done" << endl;
-    // arr.display();
-    // cout << "display array is Done" << endl;
 
     return 0;
 };

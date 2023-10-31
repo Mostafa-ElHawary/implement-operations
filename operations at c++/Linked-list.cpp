@@ -58,6 +58,26 @@ public:
             cout << cur->data << " => ";
         }
     }
+        void getItem(int indx){
+      // for (Node *cur = head; cur; cur = cur->next)
+      // {
+      //   int num;
+      //    if(num == indx){
+      //     cout << cur->data << " ";
+      //    }
+      //   num++;
+      // }
+      Node *cur = head;
+      int num = 0;
+      while(cur){
+        if(num == indx){
+          cout << "Item index " << num <<" is: " << cur->data << " ";
+          break;
+        }
+        cur = cur->next;
+        num++;
+      }
+    }
 };
 
 int main()

@@ -58,52 +58,58 @@ public:
             cout << cur->data << " => ";
         }
     }
-        void getItem(int indx){
-      // for (Node *cur = head; cur; cur = cur->next)
-      // {
-      //   int num;
-      //    if(num == indx){
-      //     cout << cur->data << " ";
-      //    }
-      //   num++;
-      // }
-      Node *cur = head;
-      int num = 0;
-      while(cur){
-        if(num == indx){
-          cout << "Item index " << num <<" is: " << cur->data << " ";
-          break;
+    void getItemByIndex(int indx)
+    {
+        if (!isEmpty())
+        {
+            Node *cur = head;
+            int num = 0;
+            while (cur != NULL)
+            {
+                if (num == indx && indx < len)
+                {
+                    cout << "Item index " << num << " is: " << cur->data << " ";
+                    break;
+                }
+                cur = cur->next;
+                num++;
+            }
         }
-        cur = cur->next;
-        num++;
-      }
+    };
+
+    void Search(int val)
+    {
+        int indx = 0;
+        for (Node *cur = head; cur; cur = cur->next, ++indx)
+        {
+            if (cur->data == val)
+            {
+                cout << "i found item " << cur->data << " in index : " << indx << " ";
+                return;
+            }
+        }
+        cout << "Did not find item " << val << endl;
     }
 };
 
 int main()
 {
 
-   Linked list;
-   // list.Insert(100);
-    if (list.isEmpty()) {
-      
-        std::cout << "The list is empty." << std::endl;
-    }else{
-      std::cout << "The list is not empty." << std::endl;
-    }
-
-  
+    Linked list;
+    // list.Insert(100);
    int CountItems ;
-  cout << "Inter count of items you need added : ";
-  cin >> CountItems;
-  for(int i = 0 ; i < CountItems ; i++){
-    cout << "Inter  items " << i+1 << " : "<< endl;
-    int val;
-    cin >> val;
-    list.Insert(val);
-  }
-  list.Len();
-  list.Print();
+    cout << "Inter count of items you need added : ";
+    cin >> CountItems;
+    for(int i = 0 ; i < CountItems ; i++){
+      cout << "Inter  items " << i << " : ";
+      int val;
+      cin >> val;
+      list.Insert(val);
+    }
+    list.Len();
+    list.Print();
+    list.getItemByIndex(3);
+    list.Search(50);
 
     return 0;
 }

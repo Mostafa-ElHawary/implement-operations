@@ -34,7 +34,7 @@ public:
         cout << "Length of linked is: " << len << endl;
     }
 
-    void Insert(int val)
+    void InsertEnd(int val)
     {
         Node *newNode = new Node(val);
         if (isEmpty())
@@ -51,13 +51,31 @@ public:
         }
     };
 
+    void InsertFront(int val)
+    {
+        Node *newNode = new Node(val);
+        if (isEmpty())
+        {
+            head = newNode;
+            tail = newNode;
+        }
+        else
+        {
+            newNode->next = head;
+            head = newNode;
+        }
+        len++;
+    }
+
     void Print()
     {
         for (Node *cur = head; cur; cur = cur->next)
         {
             cout << cur->data << " => ";
         }
+        cout << endl;
     }
+
     void getItemByIndex(int indx)
     {
         if (!isEmpty())
@@ -68,14 +86,14 @@ public:
             {
                 if (num == indx && indx < len)
                 {
-                    cout << "Item index " << num << " is: " << cur->data << " ";
+                    cout << "Item index " << num << " is: " << cur->data << " " << endl;
                     break;
                 }
                 cur = cur->next;
                 num++;
             }
         }
-    };
+    }
 
     void Search(int val)
     {
@@ -90,6 +108,10 @@ public:
         }
         cout << "Did not find item " << val << endl;
     }
+
+    void Swap()
+    {
+    }
 };
 
 int main()
@@ -97,19 +119,26 @@ int main()
 
     Linked list;
     // list.Insert(100);
-   int CountItems ;
+    int CountItems;
     cout << "Inter count of items you need added : ";
     cin >> CountItems;
-    for(int i = 0 ; i < CountItems ; i++){
-      cout << "Inter  items " << i << " : ";
-      int val;
-      cin >> val;
-      list.Insert(val);
+    for (int i = 0; i < CountItems; i++)
+    {
+        cout << "Inter  items " << i << " : ";
+        int val;
+        cin >> val;
+        list.Insert(val);
     }
     list.Len();
     list.Print();
     list.getItemByIndex(3);
     list.Search(50);
-
+    int InsertItems ;
+    cout << "Inter the item for intsertion : ";
+    cin >> InsertItems;
+    list.InsertFront(InsertItems);
+    list.Len();
+  
+    list.Print();
     return 0;
 }

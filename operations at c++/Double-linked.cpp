@@ -150,48 +150,76 @@ public:
             indx++;
         };
     }
+    void GetNextNode(int indx)
+    {
+        Node *current = head;
+        int count = 0;
+        while (current != nullptr && count < indx)
+        {
+            current = current->next;
+            count++;
+        }
+        if (count == indx)
+        {
+            cout << "The next node is : " << current->next->data << endl;
+        }
+    }
+    void GetPrevNode(int indx)
+    {
+        Node *current = head;
+        int count = 0;
+        while (current != nullptr && count < indx)
+        {
+            current = current->next;
+            count++;
+        }
+        if (count == indx)
+        {
+            cout << "The prev node is : " << current->prev->data << endl;
+        }
+    }
+    void InsertByIndx(int val, int indx)
+    {
+        Node *newNode = new Node(val);
+        // casese check
+        //  if the indx is less than 0 or greater than the length
+        if (indx < 0 || indx > len)
+        {
+            cout << "Invalid indx :(" << endl;
+        }
 
-     void InsertByIndx(int val , int indx){
-      Node* newNode = new Node(val);
-     //casese check
-     // if the indx is less than 0 or greater than the length
-     if(indx < 0 || indx > len){
-       cout << "Invalid indx :(" << endl; 
-     }
+        // if the indx == 0
+        if (indx == 0)
+        {
+            insertFront(val);
+        }
+        // if the indx == len
+        else if (indx == len)
+        {
+            insertBack(val);
+        }
 
-     // if the indx == 0
-     if(indx == 0){
-       insertFront(val);
-     }
-     //if the indx == len
-     else if(indx == len){
-       insertBack(val);
-     }
+        else
+        {
+            // Insert at a specific index.
+            Node *current = head;
+            int count = 0;
+            while (current != nullptr && count < indx)
+            {
+                current = current->next;
+                count++;
+            }
+            if (current != nullptr)
+            {
+                newNode->next = current;
+                newNode->prev = current->prev;
+                current->prev->next = newNode;
+                current->prev = newNode;
+            }
 
-
-     else {
-       // Insert at a specific index.
-       Node* current = head;
-       int count = 0;
-       while (current != nullptr && count < indx) {
-           current = current->next;
-           count++;
-       }
-       if (current != nullptr) 
-      {
-        newNode->next = current;
-        newNode->prev = current->prev;
-        current->prev->next = newNode;
-        current->prev = newNode;
-      }
-        
-
-       len++;
-     }
-
-
-     
-   }
+            len++;
+        }
+    }
     void Print()
     {
         // let's use while loop

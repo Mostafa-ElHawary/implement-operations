@@ -189,15 +189,22 @@ public:
             cur = cur->next;
             count++;
         }
+    }
 
-    } // let's check the two func
-    // and will build operations to get node by index and insert by indx
-
-    // hello we have 2 operations in our scope today
-    // 1 - insert Node by index
-    // 2 delete Node by index
-
-    // okaaaaay
+    int GetHead()
+    {
+        if (isEmpty())
+            cout << "Linked list is empty :(" << endl;
+        // cout << head->data << endl;
+        return head->data;
+    }
+    int GetTail()
+    {
+        if (isEmpty())
+            cout << "Linked list is empty :(" << endl;
+        // cout  << tail->data << endl;
+        return tail->data;
+    }
     void InsertByIndx(int val, int indx)
     {
         // any way we need this newNode
@@ -271,21 +278,32 @@ public:
 
     void DeletByVal(int val)
     {
+
+        if (val < 0 || val > len)
+            cout << "Invalid val :(" << endl;
+
+        if (len == 0)
+            DeleteFront();
+
+        if (val == GetTail())
+            DeleteBack();
         Node *cur = head;
-        int count = 0;
+        int count = 0; // using while
         while (cur != nullptr)
         {
-            if (val == cur)
-            {
-                cout << cur->data;
-                cut->prev->next = cur->next;
-                cur->next->prev = cur->prev;
-            }
 
+            if (val == cur->data)
+            {
+                cur->prev->next = cur->next;
+                cur->next->prev = cur->prev;
+
+                delete cur;
+                len--;
+                break;
+            }
+            cur = cur->next;
             count++;
         }
-        delete cur;
-        len--;
     }
 
     void Print()

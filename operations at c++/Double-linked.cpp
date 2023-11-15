@@ -63,7 +63,6 @@ public:
         len++;
         // let's check it
     }
-
     void insertBack(int val)
     {
         // let's check if the linked list is empty or not
@@ -84,7 +83,6 @@ public:
         // let's check it
         // okay it's work :)  20 in the back
     }
-
     void DeleteFront()
     {
         // let's check if the linked list is empty or not
@@ -112,8 +110,7 @@ public:
         len--;
         // let's check it
     }
-
-    void DeletBack()
+    void DeleteBack()
     {
         if (isEmpty())
         {
@@ -150,76 +147,147 @@ public:
             indx++;
         };
     }
+
     void GetNextNode(int indx)
     {
-        Node *current = head;
+        // we need to use while loop
+        if (len == 0)
+            cout << "Linked list is empty :(" << endl;
+        if (indx > len || indx < 0)
+            cout << "Index is out of range :(" << endl;
+        if (indx + 1 == len)
+            cout << "Index is out of range :(" << endl;
+        Node *cur = head;
         int count = 0;
-        while (current != nullptr && count < indx)
-        {
-            current = current->next;
+        // let's check if count < indx or != null
+        while (cur != nullptr)
+        { // okay
+            if (count == indx)
+                cout << "The next node is : " << cur->next->data << endl;
+            cur = cur->next;
             count++;
         }
-        if (count == indx)
-        {
-            cout << "The next node is : " << current->next->data << endl;
-        }
     }
+
     void GetPrevNode(int indx)
     {
-        Node *current = head;
+        // same thing
+        // we need to use while loop
+        if (len == 0)
+            cout << "Linked list is empty :(" << endl;
+        if (indx > len || indx < 0)
+            cout << "Index is out of range :(" << endl;
+        if (indx + 1 == len)
+            cout << "Index is out of range :(" << endl;
+        Node *cur = head;
         int count = 0;
-        while (current != nullptr && count < indx)
-        {
-            current = current->next;
+        // let's check if count < indx or != null
+        while (cur != nullptr)
+        { // okay
+            if (count == indx)
+                cout << "The next node is : " << cur->prev->data << endl;
+            cur = cur->next;
             count++;
         }
-        if (count == indx)
-        {
-            cout << "The prev node is : " << current->prev->data << endl;
-        }
-    }
+
+    } // let's check the two func
+    // and will build operations to get node by index and insert by indx
+
+    // hello we have 2 operations in our scope today
+    // 1 - insert Node by index
+    // 2 delete Node by index
+
+    // okaaaaay
     void InsertByIndx(int val, int indx)
     {
+        // any way we need this newNode
         Node *newNode = new Node(val);
-        // casese check
-        //  if the indx is less than 0 or greater than the length
+        // frist let's check if the indx is vaild insx
         if (indx < 0 || indx > len)
-        {
-            cout << "Invalid indx :(" << endl;
-        }
+            cout << "Invalid Index :(" << endl;
 
-        // if the indx == 0
         if (indx == 0)
-        {
-            insertFront(val);
-        }
-        // if the indx == len
-        else if (indx == len)
-        {
-            insertBack(val);
-        }
+            insertFront(val); // mean will insert Node in the  Front of linked list
 
+        if (indx == len)
+            insertBack(val); // will insert it in the Back of Node
         else
         {
-            // Insert at a specific index.
-            Node *current = head;
-            int count = 0;
-            while (current != nullptr && count < indx)
-            {
-                current = current->next;
+            // insert at a specific indx
+            // we need current and count of index
+            Node *cur = head;
+            int count = 0; // using while
+            while (cur != nullptr && count < indx)
+            { //   thinking :)
+                cur = cur->next;
                 count++;
-            }
-            if (current != nullptr)
-            {
-                newNode->next = current;
-                newNode->prev = current->prev;
-                current->prev->next = newNode;
-                current->prev = newNode;
-            }
 
-            len++;
+                // like example if will insert at indx 1
+            }
+            newNode->next = cur;
+            newNode->prev = cur->prev;
+            cur->prev->next = newNode;
+            cur->prev = newNode;
+        }
+        len++;
+        // let's check it  it's work don't worry
+    }
+
+    void DeleteByIndx(int indx)
+    {
+
+        // at the nsertion by index we use the insert front func and insert back func
+        // now we will use delet back and delet front function at the deleting by indx :)
+
+        // didn't need a anew Node sure
+
+        // frist let's check if the indx is vaild insx
+        if (indx < 0 || indx > len)
+            cout << "Invalid Index :(" << endl;
+
+        if (indx == 0)
+            DeleteFront(); // mean will insert Node in the  Front of linked list
+
+        if (indx == len)
+            DeleteBack(); // will insert it in the Back of Node
+        Node *cur = head;
+        int count = 0; // using while
+        while (cur != nullptr)
+        {
+
+            if (count == indx)
+            {
+                cur->prev->next = cur->next;
+                cur->next->prev = cur->prev;
+                // we will delete the node
+                delete cur;
+                len--;
+                break;
+            }
+            cur = cur->next; // okaay let's check i t
+            count++;
         }
     }
+
+    void DeletByVal(int val)
+    {
+        Node *cur = head;
+        int count = 0;
+        while (cur != nullptr)
+        {
+            if (val == cur)
+            {
+                cout << cur->data;
+                cut->prev->next = cur->next;
+                cur->next->prev = cur->prev;
+            }
+
+            count++;
+        }
+        delete cur;
+        len--;
+    }
+
     void Print()
     {
         // let's use while loop
@@ -232,8 +300,7 @@ public:
         }
         cout << endl;
     }
-    // Note : some thing wrong
-    // Note : the error in lopping
+
     ~Linked()
     {
         while (head)
@@ -250,25 +317,31 @@ int main()
 
     Linked list;
     list.Len();
-    // int ITEMSCOUNT ;
-    // cout << "Inter the count of Items you need insert in back ";
-    // for(int i = 1; i < ITEMSCOUNT ; i++ ){
-    //   cout << "type item: " << i  << endl ;
-    //    int val ;
-    //    cin >> val ;
-    //   list.insertBack(val);
-    // }
-    list.insertFront(10);
-    list.insertBack(20);
-    list.insertFront(30);
-    list.insertBack(40);
+
+    list.insertBack(10); // 0
+    list.insertFront(20);
+    list.insertBack(30); // 1
+    list.insertFront(40);
+    list.insertBack(50); // 2
+    list.insertFront(60);
+    list.insertBack(70);
     list.Print(); // will be 30 10 20 40 :)
+    list.Len();
+    list.GetNextNode(2); // it's true
+    list.GetPrevNode(2);
+    list.FindMiddle();
+    list.InsertByIndx(100, 2); // it's work :)
+    list.DeleteByIndx(3);      // will delet 20
+
+    list.Print();
     // list.DeleteFront();
     // list.Print(); // will be  10 20 40 :) okay
     // list.DeletBack();
     // list.Print(); // will be  10 20  :)
     // shit  sorry
-    list.Len();
+    // list.InsertByIndx(100,4);
+    // list.Print();
+    // list.FindMiddle();
     // we need a printing :)
 
     return 0;

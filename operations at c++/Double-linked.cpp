@@ -305,6 +305,18 @@ public:
             count++;
         }
     }
+    void getPosition(int val){
+        Node* cur = head ;
+    int count = 0 ;
+    while(cur!=nullptr ){
+        if(cur->data == val){
+        cout << "Index of " << val << " is : " << count << "\n";
+        
+        }
+        cur = cur->next ;
+        count++ ;
+    }
+    }
 
     void Print()
     {

@@ -74,6 +74,16 @@ public:
             }
         }
     }
+     void search(int val){
+     for (int i = top; i >= 0; i--)
+     {
+         if ( array[i] == val)
+         {
+             cout << array[i] << " is there int indx " << i ;
+         }
+     }
+     cout << "\n";
+   }
 };
 
 int main()
